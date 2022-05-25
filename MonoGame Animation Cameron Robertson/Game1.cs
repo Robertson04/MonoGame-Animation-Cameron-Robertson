@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace MonoGame_Animation_Cameron_Robertson
 {
@@ -9,6 +10,7 @@ namespace MonoGame_Animation_Cameron_Robertson
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        Random generator = new Random();
         Texture2D tribbleGreyTexture;
         Rectangle tribbleGreyRect;
         Vector2 tribbleGreySpeed;
@@ -40,7 +42,17 @@ namespace MonoGame_Animation_Cameron_Robertson
             tribbleBrownSpeed = new Vector2(4, 0);
             tribbleCreamSpeed = new Vector2(0, 4);
             tribbleOrangeSpeed = new Vector2(10, 10);
+            
             base.Initialize();
+            tribbleGreyRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleGreyRect.Width);
+            tribbleGreyRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleGreyRect.Height);
+            tribbleBrownRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleBrownRect.Width);
+            tribbleBrownRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleBrownRect.Height);
+            tribbleCreamRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleCreamRect.Width);
+            tribbleCreamRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleCreamRect.Height);
+            tribbleOrangeRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleOrangeRect.Width);
+            tribbleOrangeRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleOrangeRect.Height);
+
         }
 
         protected override void LoadContent()
@@ -49,13 +61,13 @@ namespace MonoGame_Animation_Cameron_Robertson
 
             // TODO: use this.Content to load your game content here
             tribbleGreyTexture = Content.Load<Texture2D>("tribbleGrey");
-            tribbleGreyRect = new Rectangle(300, 10, 100, 100);
+            tribbleGreyRect = new Rectangle(0, 0, 100, 100);
             tribbleBrownTexture = Content.Load<Texture2D>("tribbleBrown");
-            tribbleBrownRect = new Rectangle(300, 10, 100, 100);
+            tribbleBrownRect = new Rectangle(0, 0, 100, 100);
             tribbleCreamTexture = Content.Load<Texture2D>("tribbleCream");
-            tribbleCreamRect = new Rectangle(300, 10, 100, 100);
+            tribbleCreamRect = new Rectangle(0, 0, 100, 100);
             tribbleOrangeTexture = Content.Load<Texture2D>("tribbleOrange");
-            tribbleOrangeRect = new Rectangle(300, 10, 100, 100);
+            tribbleOrangeRect = new Rectangle(0, 0, 100, 100);
             StarTrekTexture = Content.Load<Texture2D>("StarTrek");
             crash = Content.Load<SoundEffect>("crash");
 
@@ -76,31 +88,43 @@ namespace MonoGame_Animation_Cameron_Robertson
             if (tribbleGreyRect.Right > _graphics.PreferredBackBufferWidth || tribbleGreyRect.Left < 0)
             {
                 tribbleGreySpeed.X *= -1;
+                tribbleGreyRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleGreyRect.Width);
+                tribbleGreyRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleGreyRect.Height);
                 crash.Play();
             }
             if (tribbleGreyRect.Top < 0 || tribbleGreyRect.Bottom > _graphics.PreferredBackBufferHeight)
-            { 
+            {
                 tribbleGreySpeed.Y *= -1;
+                tribbleGreyRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleGreyRect.Width);
+                tribbleGreyRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleGreyRect.Height);
                 crash.Play();
             }
             if (tribbleBrownRect.Right > _graphics.PreferredBackBufferWidth || tribbleBrownRect.Left < 0)
-            { 
+            {
                 tribbleBrownSpeed.X *= -1;
+                tribbleBrownRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleBrownRect.Width);
+                tribbleBrownRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleBrownRect.Height);
                 crash.Play();
             }
             if (tribbleCreamRect.Top < 0 || tribbleCreamRect.Bottom > _graphics.PreferredBackBufferHeight)
             {
                 tribbleCreamSpeed.Y *= -1;
+                tribbleCreamRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleCreamRect.Width);
+                tribbleCreamRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleCreamRect.Height);
                 crash.Play();
             }
             if (tribbleOrangeRect.Top < 0 || tribbleOrangeRect.Bottom > _graphics.PreferredBackBufferHeight)
             {
                 tribbleOrangeSpeed.Y *= -1;
+                tribbleOrangeRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleOrangeRect.Width);
+                tribbleOrangeRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleOrangeRect.Height);
                 crash.Play();
             }
             if (tribbleOrangeRect.Right > _graphics.PreferredBackBufferWidth || tribbleOrangeRect.Left < 0)
             {
                 tribbleOrangeSpeed.X *= -1;
+                tribbleOrangeRect.X = generator.Next(0, _graphics.PreferredBackBufferWidth - tribbleOrangeRect.Width);
+                tribbleOrangeRect.Y = generator.Next(0, _graphics.PreferredBackBufferHeight - tribbleOrangeRect.Height);
                 crash.Play();
             }
             base.Update(gameTime);
